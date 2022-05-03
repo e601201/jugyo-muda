@@ -1,0 +1,2 @@
+module EasiesHelper
+end

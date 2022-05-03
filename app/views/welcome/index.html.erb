@@ -1,18 +1,70 @@
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Album example</h1>
+        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+        <p>
+          <a href="#" class="btn btn-primary my-2">Main call to action</a>
+          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+        </p>
+      </div>
+    </div>
+  </section>
 <p>
-  Runteq 29th DaichiNagata
+  The time is now: <%= Time.now.strftime("%Y年%m月%d日") %>
 </p>
-<p>
-  The time is now: <%= Time.now %>
-</p>
-<%= link_to "New user", "#" , {class: "btn btn-primary mx-1"} %>
+  <div class="album py-5 bg-light">
+    <div class="container">
 
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Dropdown button
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul>
-</div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <%= image_tag 'easy_task.jpg', class: 'rounded' %>
+
+            <div class="card-body">
+              <p class="card-text">駆け出しキーパンチャー用のレベルです。</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <%= link_to "挑戦", easy_path , {class: "btn btn-primary mx-1"} %>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                </div>
+                <small class="text-muted">初級ミッション</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <%= image_tag 'normal_task.jpg', class: 'rounded' %>
+            <div class="card-body">
+              <p class="card-text">ゲームなのに仕事してる気分になる地味に辛いレベルです。</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <%= link_to "挑戦", normal_path , {class: "btn btn-primary mx-1"} %>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                </div>
+                <small class="text-muted">中級ミッション</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <%= image_tag 'hard_task.jpg', class: 'rounded' %>
+
+            <div class="card-body">
+              <p class="card-text">なんでこんな仕様にしたのか笑ってしまうレベルです</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <%= link_to "挑戦", hard_path , {class: "btn btn-outline-danger mx-1"} %>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                </div>
+                <small class="text-muted">上級ミッション</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<main>
