@@ -1,25 +1,109 @@
-<h1>普通のタスク</h1>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "title_it" %>
+<% end %>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  作成完了！！
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">You made it !!</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        チュートリアル完了！！ 次の入力も頑張ろう
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-        <button type="button" class="btn btn-primary">次のタスク</button>
-      </div>
+<div class="container" >
+  <h1>レジ係(中級編)</h1>
+  <p>まずは比較的簡単なレジ係のシフトを組みましょう<br>
+  従業員の要望を聞きながら翌週のシフトを作りましょう！
+  </p>
+  <h2>目標</h2>
+  <ul>
+    <li>12時から21時までのシフトを作りましょう。</li>
+    <li>最低でもレジに1人立つようにしましょう。</li>
+    <li>従業員の要望に応えてあげましょう</li>
+    <li>シフトに組み込まれていない時間は店長が出ます。(働き過ぎには注意しましょう)</li>
+  </ul>
+</div>
+<div class= "container">
+<h1>＊従業員の情報</h1>
+  <div class= "row justify-content-start">
+    <div class= "col-md-12 col-lg-4">
+      <h2>Aさん<br>(女性、32歳、主婦)</h2>
+      <p>固定シフト: <br>
+      月,水,木,日 <br>
+      固定勤務時間: 12時-21時<br>
+      -----------</p>
+      <h3>要望</h3>
+      <ul>
+      <li>時間は減らしてほしくない！</li>
+      <li>固定シフト以外の日には入れません！</li>
+      </ul>
+    </div>
+    <div class= "col-md-12 col-lg-4">
+      <h2>Bさん<br>(男性、25歳、フリーター)</h2>
+      <p>変動シフト: <br>週3日（平日に2日 & 土日に1日）<br>
+      -----------</p>
+      <h3>要望</h3>
+      <ul>
+      <li>最低でも週に15時間は入りたい</li>
+      <li>ダブルワーカーなので、夜は入りたくない</li>
+      </ul>
+    </div>
+    <div class= "col-md-12 col-lg-4">
+      <h2>Cさん<br>(女性、19歳、大学生)</h2>
+      <p>変動シフト: <br>週2日（平日に2日 & 土日に1日）<br>
+      -----------</p>
+      <h3>要望</h3>
+      <ul>
+        <li>週に８時間以上働きたくない!</li>
+        <li>1日4時間以上働きたくない!</li>
+      </ul>
     </div>
   </div>
+</div>
+<div class= "container">
+  <h2 id="make_shift">＊シフト作成</h2>
+  <%= form_with url: easy_path ,local: true, data: { turbo: false } do |f| %>
+    <div class="row gy-4" >
+      <% @week.each do |day| %>
+      <div class="col-sm-12 col-md-6 col-xxl-4">
+        <div >
+          <h4><%= day %></h4>
+        </div>
+        <% @persons.each do |person| %>
+          <div>
+            <h5><%= person.upcase %> :</h5> 
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="rest" id=<%="js_#{person}_shift_#{day}"%> onchange=<%="testIt('#{person}','#{day}')"%> >
+              <label class="form-check-label" for="flexCheckDefault">
+                お休みにする
+              </label>
+            </div>
+            <div class="mb-3 form-check">
+              <select name=<%="#{person}_#{day}[begin]"%> id=<%="js_#{person}_begin_at_#{day}"%>>〜
+                <option value>開始時刻</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+              </select>
+              <span>〜</span>
+              <select name=<%="#{person}_#{day}[end]"%> id=<%="js_#{person}_end_at_#{day}"%>>〜
+                <option value>終了時刻</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+              </select>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+    <div class="d-grid gap-2 d-md-block">
+      <%= f.submit "提出！", class: "btn btn-primary"%>
+    </div>
+  <% end %>
 </div>

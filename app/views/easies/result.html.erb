@@ -1,0 +1,61 @@
+<div class= "container">
+  <h1 style="text-align:center">結果発表！！</h1>
+  <div class= "row gy-5">
+    <%@persons.each do |person|%>
+      <div class= "col-xs-12 col-xl-4">
+          <div class="card" style="width: 20rem;">
+            <% if person[3]>90 %>
+              <%= image_tag "#{person[0]}_good.png", class: 'rounded' %>
+            <% elsif person[3]>50 %>
+              <%= image_tag "#{person[0]}_notbad.png", class: 'rounded' %>
+            <% else %>
+              <%= image_tag "#{person[0]}_bad.png", class: 'rounded' %>
+            <%end%>
+            <div class="card-body">
+              <h5 class="card-title"><%=person[0].upcase%>さん</h5>
+              <p class="card-text">総合評価：
+              <% if person[3]>90 %>
+                Good
+              <% elsif person[3]>50 %>
+                Notbad
+              <% else %>
+                Bad
+              <%end%>
+              </p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">勤務日数：<%=person[2]%>日</li>
+              <li class="list-group-item">総労働時間：<%=person[1]%>時間</li>
+              <li class="list-group-item">シフトへの満足度：<%=person[3]%>%</li>
+            </ul>
+            <div class="card-body">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                従業員の反応
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      ...
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    <%end%>
+    <p>店長の労働時間：<%=@orner_work_time%>時間</p>
+  </div>
+</div>
