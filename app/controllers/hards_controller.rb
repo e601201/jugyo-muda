@@ -119,10 +119,12 @@ class HardsController < ApplicationController
     b_sat -= 20 if @b_works_total < 15
     b_sat -= 60 if @b_works_total < 5
     b_sat -= 40 if 7-@b_work_weeks.count(0) > 3
-    b_sat -= 30 if params[:b_tue] != nil && params[:b_tue][:begin].to_i < 15
-    b_sat -= 30 if params[:b_fri] != nil && params[:b_fri][:begin].to_i < 15
-    b_sat -= 30 if params[:b_sun] != nil && params[:b_sun][:begin].to_i < 15
-    b_sat -= 30 if work_sum(params[:b_sat])>0 && work_sum(params[:b_sat])>0
+    b_sat -= 20 if params[:b_tue] != nil && params[:b_tue][:begin].to_i < 15
+    b_sat -= 20 if params[:b_fri] != nil && params[:b_fri][:begin].to_i < 15
+    b_sat -= 20 if params[:b_sun] != nil && params[:b_sun][:begin].to_i < 15
+    if work_sum(params[:b_sat])>0 && work_sum(params[:b_sun])>0
+      b_sat -= 30
+    end
     return b_sat
   end
   def check_c_satisfaction
