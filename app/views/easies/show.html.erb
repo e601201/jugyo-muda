@@ -1,109 +1,128 @@
 <% content_for :head do %>
   <%= javascript_import_module_tag "title_it" %>
 <% end %>
+<div class= "bg-light " >
+  <div class="container " >
+    <h1 class="m-3">レジ係(チュートリアル編)</h1>
+    <p>まずはシフトを組んでみましょう<br>
+    採用時に契約した、従業員のシフト内容を確認してみましょう
+    </p>
 
-<div class="container" >
-  <h1>レジ係(初級編)</h1>
-  <p>まずは比較的簡単なレジ係のシフトを組みましょう<br>
-  従業員の要望を聞きながら翌週のシフトを作りましょう！
-  </p>
-  <h2>目標</h2>
-  <ul>
-    <li>12時から21時までのシフトを作りましょう。</li>
-    <li>最低でもレジに1人立つようにしましょう。</li>
-    <li>従業員の要望に応えてあげましょう</li>
-    <li>シフトに組み込まれていない時間は店長が出ます。(働き過ぎには注意しましょう)</li>
-  </ul>
-</div>
+    <hr>
+
+    <h2 class="m-3">目標</h2>
+    <ul>
+      <li>月、火、水の３日間のシフトを作りましょう</li>
+      <li>営業時間は12時から21時までです</li>
+      <li>最低でもレジに1人立つようにしましょう。</li>
+      <li>シフトに組み込まれていない時間は自動的に店長が出ます</li>
+    </ul>
+    <hr>
+  </div>
 <div class= "container">
-<h1>＊従業員の情報</h1>
-  <div class= "row justify-content-start">
-    <div class= "col-md-12 col-lg-4">
-      <h2>Aさん</h2>
-      <p>固定シフト: <br>
-      月,水,木,日 <br>
-      固定勤務時間: 12時-21時<br>
-      -----------</p>
-      <h3>要望</h3>
-      <ul>
-      <li>時間は減らしてほしくない！(36時間以上40時間以内)</li>
-      <li>固定シフト以外の日には入れません！</li>
-      </ul>
-    </div>
-    <div class= "col-md-12 col-lg-4">
-      <h2>Bさん</h2>
-      <p>変動シフト: <br>週3日<br>
-      -----------</p>
-      <h3>要望</h3>
-      <ul>
-      <li>最低でも週に15時間は入りたい</li>
-      <li>ダブルワーカーなので、週4日以上は入りたくない</li>
-      </ul>
-    </div>
-    <div class= "col-md-12 col-lg-4">
-      <h2>Cさん</h2>
-      <p>変動シフト: <br>週2日<br>
-      -----------</p>
-      <h3>要望</h3>
-      <ul>
-        <li>週に８時間以上働きたくない!</li>
-        <li>1日4時間以上働きたくない!</li>
-      </ul>
+  <h1 class="m-3">従業員情報（３名）</h1>
+    <div class= "row justify-content-start ">
+      <div class= "col-md-12 col-lg-4">
+        <div class= "border border-dark p-2 mb-5 shadow">
+          <h2>Aさん</h2>
+          <h3>固定シフト: </h3>
+          <p>週4日契約(月,水,木,日) <br>
+          勤務時間: 12時-21時<br>
+          -----------</p>
+          <h3>要望</h3>
+          <ul>
+          <li>固定シフト以外の曜日は入りたくありません</li>
+          </ul>
+        </div>
+      </div>
+      <div class= "col-md-12 col-lg-4">
+        <div class= "border border-dark p-2 mb-5 shadow">
+          <h2>Bさん</h2>
+          <h3>変動シフト:</h3> 
+          <p>週3日希望<br>
+          -----------</p>
+          <h3>要望</h3>
+          <ul>
+          <li>1日6時間以上働きたいです</li>
+          </ul>
+        </div>
+      </div>
+      <div class= "col-md-12 col-lg-4">
+        <div class= "border border-dark p-2 mb-5 shadow">
+          <h2>Cさん</h2>
+          <h3>変動シフト:</h3> 
+          <p>週2日希望<br>
+          -----------</p>
+          <h3>要望</h3>
+          <ul>
+            <li>週に8時間以上働きたくない!</li>
+            <li>1日5時間以上働きたくない!</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<div class= "container">
-  <h2 id="make_shift">＊シフト作成</h2>
-  <%= form_with url: easy_path ,local: true, data: { turbo: false } do |f| %>
-    <div class="row gy-4" >
-      <% @week.each do |day| %>
-      <div class="col-sm-12 col-md-6 col-xxl-4">
-        <div >
-          <h3><%= t(day) %></h3>
-        </div>
-        <% @persons.each do |person| %>
-          <div>
-            <h5><%= person.upcase %>さん :</h5> 
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="rest" id=<%="js_#{person}_shift_#{day}"%> onchange=<%="testIt('#{person}','#{day}')"%> >
-              <label class="form-check-label" for="flexCheckDefault">
-                お休みにする
-              </label>
-            </div>
-            <div class="mb-3 form-check">
-              <select name=<%="#{person}_#{day}[begin]"%> id=<%="js_#{person}_begin_at_#{day}"%>>〜
-                <option value>開始時刻</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-              </select>
-              <span>〜</span>
-              <select name=<%="#{person}_#{day}[end]"%> id=<%="js_#{person}_end_at_#{day}"%>>〜
-                <option value>終了時刻</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-              </select>
-            </div>
+  <div class= "container">
+    <br>
+    <hr>
+    <div>
+      <h2 id="make_shift " class="m-3">シフト作成</h2>
+      <ul>
+        <li>
+        「お休みにする」にチェックを入れると時刻の選択がされなくなります<br>使わなくても問題ないですが、せっかく作ったので、使ってあげてください。</li>
+        <li>
+        「開始時刻」が「終了時刻」よりも大きいと0時間(エラー)としてシフトが組まれます。(注意!)</li>
+      </ul>
+    </div>
+    <%= form_with url: easy_path ,local: true, data: { turbo: false } do |f| %>
+      <div class="row">
+        <% @week.each do |day| %>
+        <div class="col-sm-12 col-md-6 col-xxl-4">
+          <div class="border mb-5 shadow">
+              <h3 class="pt-3 px-4"><%= t(day) %></h3>
+            <% @persons.each do |person| %>
+              <div class="border p-2">
+                <h5><%= person.upcase %>さん :</h5> 
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="rest" id=<%="js_#{person}_shift_#{day}"%> onchange=<%="testIt('#{person}','#{day}')"%> >
+                  <label class="form-check-label" for="flexCheckDefault">
+                    お休みにする
+                  </label>
+                </div>
+                <div class="mb-3 form-check">
+                  <select name=<%="#{person}_#{day}[begin]"%> id=<%="js_#{person}_begin_at_#{day}"%>>
+                    <option value>開始時刻</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                  </select>
+                  <span>〜</span>
+                  <select name=<%="#{person}_#{day}[end]"%> id=<%="js_#{person}_end_at_#{day}"%>>
+                    <option value>終了時刻</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                  </select>
+                </div>
+              </div>
+            <% end %>
           </div>
+        </div>
         <% end %>
       </div>
-      <% end %>
-    </div>
-    <div class="d-grid gap-2 d-md-block">
-      <%= f.submit "提出！", class: "btn btn-primary"%>
-    </div>
-  <% end %>
+        <%= f.submit "提出！", class: "col-12 ms-auto btn btn-primary btn-lg mt-3 shadow ", data: {confirm:"hello"}%>
+    <% end %>
+  </div>
 </div>

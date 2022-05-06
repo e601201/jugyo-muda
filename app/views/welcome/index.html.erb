@@ -1,61 +1,55 @@
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">メインタイトル</h1>
-        <p class="lead text-muted">てすとテスト</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-        </p>
-      </div>
+      <%= image_tag 'jugyomuda.png', class: 'rounded' %>
     </div>
   </section>
   <div class="album py-5 bg-light">
     <div class="container">
-
+      <h2 >
+      おめでとうございます！！ あなたを店長に任命いたします。<br>
+      <br>
+      従業員のシフト作りを通じて世間のつらさを味わいましょう</h2>
+      <br>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
-          <div class="card shadow-sm">
+          <div class="card shadow-lg" id="select_level">
             <%= image_tag 'easy_task.jpg', class: 'rounded' %>
-
             <div class="card-body">
-              <p class="card-text">まずは簡単なシフトを作ってみましょう！</p>
+              <p class="card-text">まずは簡単な3日シフトを作ってみましょう！</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <%= link_to "挑戦", easy_path , {class: "btn btn-primary mx-1"} %>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <%= link_to "挑戦する", easy_path , {class: "btn btn-outline-danger mx-1"} %>
                 </div>
-                <small class="text-muted">初級ミッション</small>
+                <small class="text-muted">チュートリアル編</small>
               </div>
             </div>
           </div>
         </div>
         <div class="col">
-          <div class="card shadow-sm">
+          <div class="card shadow-lg">
             <%= image_tag 'normal_task.jpg', class: 'rounded' %>
             <div class="card-body">
-              <p class="card-text">慣れてきたら従業員の要望に応えてみましょう！<br>考慮する項目が増えてきます。</p>
+              <p class="card-text">従業員の要望に応えてみましょう！</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <%= link_to "挑戦", normal_path , {class: "btn btn-primary mx-1"} %>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <%= link_to "挑戦する", normal_path , {class: "btn btn-outline-danger mx-1"} %>
                 </div>
-                <small class="text-muted">中級ミッション</small>
+                <small class="text-muted">中級編</small>
               </div>
             </div>
           </div>
         </div>
         <div class="col">
-          <div class="card shadow-sm">
+          <div class="card shadow-lg">
             <%= image_tag 'hard_task.jpg', class: 'rounded' %>
 
             <div class="card-body">
-              <p class="card-text">現実のつらさを味わいましょう。<br>お酒が飲みたくなります。</p>
+              <p class="card-text">より現実味を出しました。<br>現実では全員がhappyになれないことを知りましょう</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <%= link_to "挑戦", hard_path , {class: "btn btn-outline-danger mx-1"} %>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <%= link_to "挑戦する", hard_path , {class: "btn btn-outline-danger mx-1"} %>
                 </div>
-                <small class="text-muted">上級ミッション</small>
+                <small class="text-muted">上級編</small>
               </div>
             </div>
           </div>

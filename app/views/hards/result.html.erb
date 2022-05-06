@@ -1,0 +1,96 @@
+<div class= "container">
+  <h1 class="py-2 text-center " >結果発表！！</h1>
+  <div class= "row">
+    <%@persons.each do |person|%>
+      <div class= "col-xs-12 col-xl-4">
+        <div class="card shadow mb-5">
+          <% if person[3]>90 %>
+            <%= image_tag "#{person[0]}_good.png", class: 'rounded' %>
+          <% elsif person[3]>50 %>
+            <%= image_tag "#{person[0]}_notbad.png", class: 'rounded' %>
+          <% else %>
+            <%= image_tag "#{person[0]}_bad.png", class: 'rounded' %>
+          <%end%>
+          <div class="card-body">
+            <h5 class="card-title text-center "><%=person[0].upcase%>さん</h5>
+            <p class="card-text">総合評価：
+            <% if person[3]>90 %>
+              Good
+            <% elsif person[3]>50 %>
+              Not Bad
+            <% else %>
+              Bad
+            <%end%>
+            </p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">勤務日数：<%=person[2]%>日</li>
+            <li class="list-group-item">総労働時間：<%=person[1]%>時間</li>
+            <li class="list-group-item">シフトへの満足度：<%=person[3]%>%</li>
+            <li class="list-group-item">一言：
+              <% if person[3]>90 %>
+                <%= person[4][0] %>
+              <% elsif person[3]>70 %>
+                <%= person[4][1] %>
+              <% elsif person[3]>50 %>
+                <%= person[4][2] %>
+              <% else %>
+                <%= person[4][3] %>
+              <%end%>
+            </li>
+          </ul>
+        </div>
+      </div>
+    <%end%>
+  <div class= "row">
+    <div class= "col-xs-12 col-xl-4">
+      <div class="card shadow-sm mb-3 bg-light">
+        <div class="card-body">
+          <h3>店長</h3>
+          <ul class="list-group list-group-flush" style="list-style: none;">
+            <li>労働時間(１ヶ月)：<%=@orner_work_time*4%>時間</li>
+            <li>過労死ライン：
+            <%if @orner_work_time*4 > 20 %>
+              危険！！<br>（終業後のお酒の量が尋常じゃありません）
+            <%elsif @orner_work_time*4 > 15 %>
+              注意！！<br>（他の業務に手がつかず、タスクが全体的に遅れてきています）
+            <%else%>
+              問題ありません
+            <%end%>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+        <div class= "col-xs-12 col-xl-4">
+      <div class="card shadow-sm mb-3 bg-light">
+        <div class="card-body">
+          <h3>マネージャー評価</h3>
+          <ul class="list-group list-group-flush" style="list-style: none;">
+            <li>余剰労働時間:<%=@persons_total_work_time - 63%>時間 <br></li>
+            <li>評価：
+            <%if @persons_total_work_time > 64 %>
+              要注意<br>
+              人員の配置を見直してください
+            <%elsif @persons_total_work_time > 63%>
+              気になる点はありますが、おおむね問題ありません<br>
+              (LGTMです)
+            <%else%>
+              個人的には問題なし<br>
+              (LGTMです)
+            <%end%>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3 justify-content-start">
+    <div class="col">
+    <%= link_to "もう一度挑戦！" ,hard_path , class:"btn btn-primary" %>
+    </div>
+    <div class="col">
+    <%= link_to "トップページへ" ,root_path(anchor: "select_level") ,class:"btn btn-success" %>
+    </div>
+  </div>
+</div>
